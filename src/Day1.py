@@ -1,9 +1,11 @@
 f = list(open("input/day1.txt", "r"))
 
-def day1_1(arg):
+
+def day_1_1(arg):
     return sum(int(x) for x in arg)
 
-def day1_2(arg):
+
+def day_1_2(arg):
     numbers = set()
     freq = 0
     Done = False
@@ -18,5 +20,5 @@ def day1_2(arg):
     return freq
 
 
-print(day1_1(f))
-print(day1_2(f))
+print(day_1_1(f))
+print(day_1_2(f))
