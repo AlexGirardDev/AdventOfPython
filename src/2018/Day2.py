@@ -1,4 +1,4 @@
-f = list(open("input/day2.txt", "r"))
+f = list(open("input/2018/day2.txt", "r"))
 
 
 def day2_1(arg):
