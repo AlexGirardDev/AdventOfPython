@@ -1,2 +1,2 @@
 # AdventOfPython
-My advent of code stuff solutions in python
+My advent of code solutions in python
