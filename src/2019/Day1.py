@@ -1,8 +1,8 @@
-f = list(open("input/2019/day1.txt", "r"))
+f = [int(x) for x in open("input/2019/day1.txt", "r")]
 
 
 def calc_mass(x):
-    return int(x) // 3 - 2
+    return x // 3 - 2
 
 
 def day1_1():
@@ -23,5 +23,5 @@ def day2_2():
     print(total)
 
 
-day1_1()
-day2_2()
+# day1_1()
+# day2_2()
