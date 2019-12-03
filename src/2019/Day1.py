@@ -5,7 +5,7 @@ def calc_mass(x):
     return x // 3 - 2
 
 
-def day1_1():
+def day2_1():
     print(str(sum([calc_mass(x) for x in f])))
 
 
@@ -23,5 +23,5 @@ def day2_2():
     print(total)
 
 
-# day1_1()
+# day2_1()
 # day2_2()
