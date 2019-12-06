@@ -8,8 +8,11 @@ def day5_1():
     opcode = 0
     input = 5
     while True:
-        instruction = ("00000" + str(f[opcode]))[-5:]
+        instruction = ("00000" + str(f[opcode]))[-5:][::-1]
         opcode_instruction = instruction[-1:]
+        def get_param(idx):
+            return f[f[opcode + idx]] if instruction[idx +1] == '0' else f[opcode + idx]
+        
         if instruction[-2:] == '99':
             print("!!!HALT!!!")
             return
@@ -21,8 +24,7 @@ def day5_1():
             opcode += 2
         # output
         elif opcode_instruction == '4':
-            param_1 = f[f[opcode + 1]
-                        ] if instruction[2] == '0' else f[opcode + 1]
+            param_1 = get_param(1)
             print(param_1)
             opcode += 2
         # add
