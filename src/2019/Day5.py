@@ -4,15 +4,13 @@ f = [int(x) for x in '3,225,1,225,6,6,1100,1,238,225,104,0,1101,82,10,225,101,94
 #      999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99]
 #f=[3,3,1105,-1,9,1101,0,0,12,4,12,99,1]
 
+
 def day5_1():
     opcode = 0
     input = 5
     while True:
-        instruction = ("00000" + str(f[opcode]))[-5:][::-1]
+        instruction = ("00000" + str(f[opcode]))[-5:]
         opcode_instruction = instruction[-1:]
-        def get_param(idx):
-            return f[f[opcode + idx]] if instruction[idx +1] == '0' else f[opcode + idx]
-        
         if instruction[-2:] == '99':
             print("!!!HALT!!!")
             return
@@ -24,7 +22,8 @@ def day5_1():
             opcode += 2
         # output
         elif opcode_instruction == '4':
-            param_1 = get_param(1)
+            param_1 = f[f[opcode + 1]
+                        ] if instruction[2] == '0' else f[opcode + 1]
             print(param_1)
             opcode += 2
         # add
