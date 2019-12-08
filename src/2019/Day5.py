@@ -17,8 +17,7 @@ def day5_1():
         #print(f"{f[opcode]}-{f[opcode+1]}-{f[opcode+2]}-{f[opcode+3]}")
         # Input
         if opcode_instruction == '3':
-            print('input')
-            f[f[opcode + 1]] = input
+            f[f[opcode + 1]] = input("prompt")
             opcode += 2
         # output
         elif opcode_instruction == '4':

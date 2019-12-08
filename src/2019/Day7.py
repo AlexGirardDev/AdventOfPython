@@ -120,18 +120,32 @@ def day5_1():
 
 
 class IntCode():
-    def __init__(self, input, phase):
-        self.input = input
+    def __init__(self, int_code, phase):
+        self.int_code = int_code
         self.phase = phase
+        self.input = 0
         self.done = False
         self.first_input = False
         self.opcode = 0
         self.last_output = 0
 
+    def get_param(self, i, inst):
+        return self.int_code[self.int_code[self.opcode + i]
+                             ] if inst[3-i] == '0' else self.int_code[self.opcode + 1]
+
+    def opcode_input(self, instruction):
+        if not self.first_input:
+            self.int_code[self.int_code[self.opcode + 1]] = self.phase
+            self.first_input = True
+        else:
+            self.int_code[self.int_code[self.opcode + 1]] = self.input
+            self.opcode += 2
+
     def iterate(self, input):
+        self.input = input
         output = 0
         while True:
-            instruction = ("00000" + str(self.input[self.opcode]))[-5:]
+            instruction = ("00000" + str(self.int_code[self.opcode]))[-5:]
             opcode_instruction = instruction[-1:]
             if instruction[-2:] == '99':
                 self.done = True
@@ -142,82 +156,75 @@ class IntCode():
             # Input
             elif opcode_instruction == '3':
                 # print('input')
-                if not self.first_input:
-                    self.input[self.input[self.opcode + 1]] = self.phase
-                    self.first_input = True
-                else:
-                    self.input[self.input[self.opcode + 1]] = input
-                self.opcode += 2
+                self.opcode_input(instruction)
             # output
             elif opcode_instruction == '4':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
+                param_1 = self.get_param(1, instruction)
                 output = param_1
-                # print(output)
                 self.opcode += 2
                 self.last_output = output
                 return output
             # add
             elif opcode_instruction == '1':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
-                param_3 = self.input[self.opcode + 3]
-                self.input[param_3] = param_1 + param_2
+                param_1 = self.int_code[self.int_code[self.opcode + 1]
+                                        ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
+                param_3 = self.int_code[self.opcode + 3]
+                self.int_code[param_3] = param_1 + param_2
                 self.opcode += 4
             # Mult
             elif opcode_instruction == '2':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
-                param_3 = self.input[self.opcode + 3]
-                self.input[param_3] = param_1 * param_2
+                param_1 = self. int_code[self.int_code[self.opcode + 1]
+                                         ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
+                param_3 = self.int_code[self.opcode + 3]
+                self.int_code[param_3] = param_1 * param_2
                 self.opcode += 4
             # Jump if true
             elif opcode_instruction == '5':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
+                param_1 = self.int_code[self.int_code[self.opcode + 1]
+                                        ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
                 if param_1 != 0:
                     self.opcode = param_2
                 else:
                     self.opcode += 3
             # Jump if False
             elif opcode_instruction == '6':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
+                param_1 = self.int_code[self.int_code[self.opcode + 1]
+                                        ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
                 if param_1 == 0:
                     self.opcode = param_2
                 else:
                     self.opcode += 3
             # Less Than
             elif opcode_instruction == '7':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
-                param_3 = self.input[self.opcode + 3]
+                param_1 = self.int_code[self.int_code[self.opcode + 1]
+                                        ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
+                param_3 = self.int_code[self.opcode + 3]
                 if param_1 < param_2:
-                    self.input[param_3] = 1
+                    self.int_code[param_3] = 1
                 else:
-                    self.input[param_3] = 0
+                    self.int_code[param_3] = 0
                 self.opcode += 4
             # equals
             elif opcode_instruction == '8':
-                param_1 = self.input[self.input[self.opcode + 1]
-                                     ] if instruction[2] == '0' else self.input[self.opcode + 1]
-                param_2 = self.input[self.input[self.opcode + 2]
-                                     ] if instruction[1] == '0' else self.input[self.opcode + 2]
-                param_3 = self.input[self.opcode + 3]
+                param_1 = self.int_code[self.int_code[self.opcode + 1]
+                                        ] if instruction[2] == '0' else self.int_code[self.opcode + 1]
+                param_2 = self.int_code[self.int_code[self.opcode + 2]
+                                        ] if instruction[1] == '0' else self.int_code[self.opcode + 2]
+                param_3 = self.int_code[self.opcode + 3]
                 if param_1 == param_2:
-                    self.input[param_3] = 1
+                    self.int_code[param_3] = 1
                 else:
-                    self.input[param_3] = 0
+                    self.int_code[param_3] = 0
                 self.opcode += 4
 
 
