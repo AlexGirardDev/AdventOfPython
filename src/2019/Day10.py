@@ -1,47 +1,67 @@
 import itertools
 import math
-f = [[y != "." for y in x] for x in open("input/2019/day10.txt", "r")]
-
-
+og = [[(0 if y == "." else 1) for y in x] for x in open("input/2019/day10.txt", "r")][::-1]
+f = og.copy()
 def day9_1():
+    print(og[1][0])
+    for x in range(len(og)):
+        for y in range(len(og[x])):
+            f = og.copy()
+            if f[x][y] == 0:
+                continue
+            count = 0
+            for x2 in range(len(f)):
+                for y2 in range(len(f[x2])):
+                    if f[x2][y2] == 1:
+                        los = check_line_of_sight(x, y, x2, y2)
+                        
+                        if los is None:
+                            continue
+                        
+                        if (los == 2):
+                            count += 1
+                        f[x2][y2] = los
+            print(f"{x},{y} - {count}")
 
-    doesColide(3, 9, 0, 0)
-    doesColide(0, 3, 9, 0)
-    doesColide(0, 0, 3, 9)
-    doesColide(9, 0, 0, 3)
-    # for x in f:
-    #     for y in x:
-    #         for x2 in f:
-    #             for y2 in y:
 
-
-def doesColide(x, y, x2, y2):
-    print(f"--{x},{y},{x2},{y2}--")
+def check_line_of_sight(x, y, x2, y2):
+    #print(f"--{x},{y},{x2},{y2}--")
+    if {x, y} == {x2, y2}:
+        return 1
     x_dif = x2 - x
     y_dif = y2 - y
 
-    x_ang = x_dif / y_dif
-    y_ang = y_dif / x_dif
-    new_x = 0
-    new_y = 0
 
-    for z in range(1, abs(x_dif)):
-        new_x = abs(x_dif) - z
-        new_y = abs(y_dif) - (y_ang * z)
-        if x_dif < 0 and y_dif < 0:
-            new_x = x2 + new_x
-            new_y = y2 + new_y
-        elif x_dif > 0 and y_dif < 0:
-            new_x = x2 - new_x
-            new_y = y - (new_y-y)
-        elif x_dif > 0 and y_dif > 0:
-            new_x = x2 - new_x
-            new_y = y2 - new_y
-        elif x_dif < 0 and y_dif > 0:
-            new_x = x - new_x
-            new_y = new_y - y2
-        if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
-            print(f"{new_x},{new_y}")
+    try:
+        x_ang = x_dif / y_dif
+        y_ang = y_dif / x_dif
+        new_x = 0
+        new_y = 0
+
+
+        for z in range(1, abs(x_dif)):
+            new_x = abs(x_dif) - z
+            new_y = abs(y_dif) - (y_ang * z)
+            if x_dif < 0 and y_dif < 0:
+                new_x = x2 + new_x
+                new_y = y2 + new_y
+            elif x_dif > 0 and y_dif < 0:
+                new_x = x2 - new_x
+                new_y = y - (new_y-y)
+            elif x_dif > 0 and y_dif > 0:
+                new_x = x2 - new_x
+                new_y = y2 - new_y
+            elif x_dif < 0 and y_dif > 0:
+                new_x = x - new_x
+                new_y = new_y - y2
+            if (new_x * 1.0).is_integer() and (new_y * 1.0).is_integer():
+                if (f[int(new_x)][int(new_y)] != 0):
+                    return f[int(x2)][int(y2)]
+
+                #print(f"{new_x},{new_y}")
+        return 2
+    except ZeroDivisionError:
+        return None #f[int(new_x)][int(new_y)]
     # if x_dif < y_dif:
     #     y_ang = y_dif/x_dif
     #     for z in range(1, y_dif):
