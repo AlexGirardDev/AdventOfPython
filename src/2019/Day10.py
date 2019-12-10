@@ -5,10 +5,10 @@ f = [[y != "." for y in x] for x in open("input/2019/day10.txt", "r")]
 
 def day9_1():
 
-    doesColide(9, 3, 0, 0)
     doesColide(3, 9, 0, 0)
-    doesColide(0, 0, 9, 3)
+    doesColide(0, 3, 9, 0)
     doesColide(0, 0, 3, 9)
+    doesColide(9, 0, 0, 3)
     # for x in f:
     #     for y in x:
     #         for x2 in f:
@@ -22,33 +22,26 @@ def doesColide(x, y, x2, y2):
 
     x_ang = x_dif / y_dif
     y_ang = y_dif / x_dif
-    if x_dif > y_dif:
-        if (y_dif < 0):
-            for z in range(x_dif, 1):
-                new_x = x_dif - z
-                new_y = y_dif - (y_ang * z)
-                if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
-                    print(f"{new_x},{new_y}")
-        else:
-            for z in range(1, y_dif):
-                new_x = x_dif - (x_ang * z)
-                new_y = y_dif - z
-                if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
-                    print(f"{new_x},{new_y}")
-    if y_dif > x_dif:
-        if (x_dif < 0):
-            for z in range(y_dif, 1):
-                new_x = x_dif - z
-                new_y = y_dif - (y_ang * z)
-                if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
-                    print(f"{new_x +x},{new_y + y}")
-        else:
-            for z in range(1,x_dif):
-                new_x = x_dif - (y_ang * z)
-                new_y = y_dif - z
-                if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
-                    print(f"{x2 - new_x},{y2 - new_y}")
+    new_x = 0
+    new_y = 0
 
+    for z in range(1, abs(x_dif)):
+        new_x = abs(x_dif) - z
+        new_y = abs(y_dif) - (y_ang * z)
+        if x_dif < 0 and y_dif < 0:
+            new_x = x2 + new_x
+            new_y = y2 + new_y
+        elif x_dif > 0 and y_dif < 0:
+            new_x = x2 - new_x
+            new_y = y - (new_y-y)
+        elif x_dif > 0 and y_dif > 0:
+            new_x = x2 - new_x
+            new_y = y2 - new_y
+        elif x_dif < 0 and y_dif > 0:
+            new_x = x - new_x
+            new_y = new_y - y2
+        if (new_x*1.0).is_integer() and (new_y*1.0).is_integer():
+            print(f"{new_x},{new_y}")
     # if x_dif < y_dif:
     #     y_ang = y_dif/x_dif
     #     for z in range(1, y_dif):
