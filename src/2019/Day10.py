@@ -1,12 +1,23 @@
 import itertools
 import math
-og = [[(0 if y == "." else 1) for y in x] for x in open("input/2019/day10.txt", "r")][::-1]
-f = og.copy()
+og = [[(0 if y == "." else 1) for y in x]
+      for x in open("input/2019/day10.txt", "r")]
+
+
+def fill_f():
+    fd = [[0 for y in range(len(og)+5)] for x in range(len(og[0])+5)]
+    for x in range(len(og)-1):
+        for y in range(len(og[x])-1):
+            fd[x][y] = og[y][x]
+    return fd
+
+
 def day9_1():
-    print(og[1][0])
+
+    # print(f[3][1])
     for x in range(len(og)):
         for y in range(len(og[x])):
-            f = og.copy()
+            f = fill_f()
             if f[x][y] == 0:
                 continue
             count = 0
@@ -14,10 +25,10 @@ def day9_1():
                 for y2 in range(len(f[x2])):
                     if f[x2][y2] == 1:
                         los = check_line_of_sight(x, y, x2, y2)
-                        
+
                         if los is None:
                             continue
-                        
+
                         if (los == 2):
                             count += 1
                         f[x2][y2] = los
@@ -25,19 +36,17 @@ def day9_1():
 
 
 def check_line_of_sight(x, y, x2, y2):
-    #print(f"--{x},{y},{x2},{y2}--")
+    # print(f"--{x},{y},{x2},{y2}--")
     if {x, y} == {x2, y2}:
         return 1
     x_dif = x2 - x
     y_dif = y2 - y
-
 
     try:
         x_ang = x_dif / y_dif
         y_ang = y_dif / x_dif
         new_x = 0
         new_y = 0
-
 
         for z in range(1, abs(x_dif)):
             new_x = abs(x_dif) - z
@@ -58,10 +67,10 @@ def check_line_of_sight(x, y, x2, y2):
                 if (f[int(new_x)][int(new_y)] != 0):
                     return f[int(x2)][int(y2)]
 
-                #print(f"{new_x},{new_y}")
+                # print(f"{new_x},{new_y}")
         return 2
     except ZeroDivisionError:
-        return None #f[int(new_x)][int(new_y)]
+        return None  # f[int(new_x)][int(new_y)]
     # if x_dif < y_dif:
     #     y_ang = y_dif/x_dif
     #     for z in range(1, y_dif):
@@ -98,4 +107,5 @@ def day9_2():
     pass
 
 
+f = fill_f()
 day9_1()
