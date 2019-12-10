@@ -100,6 +100,7 @@ def get_pixel(arg, x, y):
     for i in arg:
         if i[x][y] == 0:
             return " "
+        
         elif i[x][y] == 1:
             return "X"
 
