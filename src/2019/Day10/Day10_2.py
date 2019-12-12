@@ -5,7 +5,7 @@ import os.path
 import os
 from os import path
 path = "C:\Dropbox\Github\AdventOfPython\Input\\2019\Day10.txt"
-f = np.transpose([[0 if y == "." else 1 for y in x.strip()] for x in open(path, "r")])
+f = np.transpose([[0 if y == "." else 1 for y in x.strip()] for x in open("input/2019/day10.txt", "r")])
 print(path)
 def angle_between(p1, p2):
     ang1 = np.arctan2(*p1[::-1])
