@@ -13,13 +13,7 @@ og = np.transpose([[0 if y == "." else 1 for y in x.strip()] for x in open(path,
 f = og.copy()
 output_result = "AOC10_2019" not in os.getcwd()
 def day9_1():
-
-    
-    # print(check_line_of_sight(1,2,0,3))
-    # return
-
-
-
+    best_cords = []
     highest_count = 0
     for x in range(len(og)):
         for y in range(len(og[x])):
@@ -45,10 +39,12 @@ def day9_1():
                         #f[x2][y2] = los
             if count > highest_count:
                 highest_count = count
+                best_cords = [x,y]
             if output_result:
-                pass#print(f"{x},{y} - {count}")
+                print(f"{x},{y} - {count}")
             #return
     print(highest_count)
+    print(best_cords)
 
 
 def check_line_of_sight(x, y, x2, y2):

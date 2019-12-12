@@ -9,8 +9,14 @@
         
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <StackPanel Orientation="Horizontal">
+
+
+
         <Button Click="ButtonBase_OnClick" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10">Start</Button>
-        <Label x:Name="LAbelCords" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" Margin="80, 0">x,y</Label>
+        <Button Click="ButtonBase_2_OnClick" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10">Start</Button>
+        <Label x:Name="LAbelCords" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" >x,y</Label>
+        </StackPanel>
         <Canvas x:Name="Canvas" Margin="40"></Canvas>
     </Grid>
 </Window>

@@ -43,8 +43,9 @@ namespace AOC10_2019
         private int _keyIndex = 0;
         private (int, int) _specificKey = (1,0);
         private BitmapImage ast = null;
+        private BitmapImage boom = null;
 
-        Timer timer = new Timer(1);
+        Timer timer = new Timer(25);
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -56,9 +57,14 @@ namespace AOC10_2019
             ast.BeginInit();
             ast.UriSource = new Uri(@"C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\asteroid.png");
             ast.EndInit();
-            
 
-            string fileName = @"C:\Dropbox\Github\AdventOfPython\src\2019\day10\Day10.py";
+            boom = new BitmapImage();
+            boom.BeginInit();
+            boom.UriSource = new Uri(@"C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\boom.png");
+            boom.EndInit();
+
+
+            string fileName = @"C:\Dropbox\Github\AdventOfPython\src\2019\day10\Day10_2.py";
             string intputPath = "";
             Process p = new Process();
             p.StartInfo = new ProcessStartInfo(@"C:\Users\Alexsdesktop\AppData\Local\Microsoft\WindowsApps\python3.8.exe", fileName)
@@ -128,18 +134,30 @@ namespace AOC10_2019
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            Application.Current.Dispatcher.Invoke(new Action(() => { DrawLines(true); }));
+
             if (_lineIndex >= _pythonOutput[_specificKey].Count-1)
             {
+                
                 _lineIndex = 0;
+                
                 _keyIndex++;
+                if(_keyIndex >= _keys.Count)
+                {
+                    timer.Stop();
+                    Application.Current.Dispatcher.Invoke(new Action(() => { lines.ForEach(Canvas.Children.Remove); }));
+                    lines.Clear();
+                    return;
+                }
+                    
                 _specificKey = _keys[_keyIndex];
-                Application.Current.Dispatcher.Invoke(new Action(() => { DrawLines(true); }));
+                
                 counter = 0;
             }
             else
                 _lineIndex++;
 
-            Application.Current.Dispatcher.Invoke(new Action(() => { DrawLines(false); }));
+            //Application.Current.Dispatcher.Invoke(new Action(() => { DrawLines(true); }));
         }
 
         private void DrawLines(bool clearLines)
@@ -171,6 +189,7 @@ namespace AOC10_2019
                 var x2 = _pythonOutput[_specificKey][_lineIndex].Item1;
                 var y2 = _pythonOutput[_specificKey][_lineIndex].Item2;
                 DrawLine(x2, y2, _specificKey.Item1, _specificKey.Item2, true);
+                elipDictionary[(x2, y2)].Source = boom;
             }
         }
 
@@ -187,14 +206,14 @@ namespace AOC10_2019
             DrawPoint(x2,y2);
             var padding = dotSize * 1.25;
             var line = new Line();
-            line.Stroke = lineStates[(x,y,x2,y2)]? Brushes.Red: Brushes.Green;
+            line.Stroke =  Brushes.Red;//lineStates[(x,y,x2,y2)]? Brushes.Red:
             Canvas.SetZIndex(line, 5);
             //Canvas.SetZIndex(line, lineStates[(x, y, x2, y2)] ? 4 : 5);
-            if (!lineStates[(x, y, x2, y2)])
-            {
-                counter ++ ;
-                LAbelCords.Content = counter;
-            }
+            //if (!lineStates[(x, y, x2, y2)])
+            //{
+            //    counter ++ ;
+            //    LAbelCords.Content = counter;
+            //}
             
             line.X1 = x * gridSpacing  + padding;
             line.X2 = x2 * gridSpacing + padding;
@@ -222,6 +241,7 @@ namespace AOC10_2019
            
         }
         List<Ellipse> points = new List<Ellipse>();
+        Dictionary<(int,int), Image> elipDictionary = new Dictionary<(int, int), Image>();
         private void DrawAsteroid(int x, int y)
         {
             var padding = dotSize * 1.25;
@@ -245,21 +265,21 @@ namespace AOC10_2019
                 //DrawLines(false);
 
             };
+            
 // currentDot.Fill = new SolidColorBrush(Colors.Red);
             currentDot.Margin = new Thickness(x*gridSpacing - (dotSize* mult / 2) + padding , y*gridSpacing - (dotSize* mult / 2) + padding, 0, 0); // Sets the position.
             Canvas.Children.Add(currentDot);
+            elipDictionary.Add((x,y),currentDot);
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        { 
+           Timer_Elapsed(null,null);
+        }
+
+        private void ButtonBase_2_OnClick(object sender, RoutedEventArgs e)
         {
-            timer.Start();
-            return;
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                _keyIndex++;
-                _lineIndex++;
-                //DrawLines();
-            }));
+          timer.Start();
         }
     }
 }
