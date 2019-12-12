@@ -1,0 +1,15 @@
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\MainWindow.g.cs
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\App.g.cs
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019_MarkupCompile.cache
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019_MarkupCompile.lref
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\input.txt
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\asteroid.png
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\AOC10_2019.exe.config
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\AOC10_2019.exe
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\AOC10_2019.pdb
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\MainWindow.baml
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.g.resources
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.Properties.Resources.resources
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.csproj.GenerateResource.cache
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.exe
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.pdb
