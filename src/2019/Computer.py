@@ -8,6 +8,7 @@ class Computer():
         self.opcode = 0
         self.last_output = 0
         self.relative_index = 0
+        self.needs_input = False
 
     def iterate(self, input):
         output = 0
@@ -52,8 +53,10 @@ class Computer():
             # print(f"{self.input[opcode]}-{self.input[opcode+1]}-{self.input[opcode+2]}-{self.input[opcode+3]}")
             # Input
             elif opcode_instruction == '3':
-                # print('input')
-                self.input[get_param_3()] = self.phase
+                if input is None:
+                    return None
+                self.needs_input = False
+                self.input[self.input[self.opcode +1]] = input
                 self.opcode += 2
             # output
             elif opcode_instruction == '4':
