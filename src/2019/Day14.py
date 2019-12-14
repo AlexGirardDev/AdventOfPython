@@ -30,27 +30,16 @@ print(ores)
 
 
 def calc_ore_cost(ore):
-    if ore == "ORE":
-        return 1
-    total = 0
-    ore1 = ores[ore]
-    for x in ores[ore].requriments:
-
-        requirment = ores[x[0]]
-        produces = requirment.output
-        requires = 0
-        if (x[1] <= produces):
-            requires = 1
-        else:
-            requires = x[1] // produces
-        if x[0] == "ORE":
-            total += requirment.output
-        elif x[1] != 0:
-            for _ in range(requires):
-                total += calc_ore_cost(x[0])
+    if ore.name == "ORE":
+        return ore.output
+    total = 0 
+    for x in ore.requriments:
+        required_ore = ores[x[0]]
+        requried_ammount  = ores[1]
+        
     return total
 
 
 counter = 0
 print(counter)
-print(calc_ore_cost("FUEL"))
+print(calc_ore_cost(ores["FUEL"]))
