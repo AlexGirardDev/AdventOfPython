@@ -38,8 +38,8 @@ while not com.done:
                     output += "\n"
         print(output)
         
-        sleep(0.05)
-        system('cls')
+        sleep(0.08)
+        #system('cls')
         if ball_x > block_x:
             output = com.iterate(1)
         elif ball_x < block_x:
