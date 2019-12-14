@@ -13,7 +13,7 @@
 
 
 
-        <Button Click="ButtonBase_OnClick" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10">Start</Button>
+        <Button Click="ButtonBase_OnClick" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10">PRESSS</Button>
         <Button Click="ButtonBase_2_OnClick" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10">Start</Button>
         <Label x:Name="LAbelCords" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="0" >x,y</Label>
         </StackPanel>

@@ -7,7 +7,7 @@ from os import path
 path = "C:\Dropbox\Github\AdventOfPython\Input\\2019\Day10.txt"
 og = np.transpose([[0 if y == "." else 1 for y in x.strip()] for x in open(path, "r")])
 f = og.copy()
-output_result = True #this needs to be set to False if you want to run the visualizer
+output_result = False #this needs to be set to False if you want to run the visualizer
 if output_result:
     print(path)
 def day9_1():
@@ -33,8 +33,8 @@ def day9_1():
             if count > highest_count:
                 highest_count = count
                 best_cords = [x,y]
-            # if output_result:
-            #     print(f"{x},{y} - {count}")
+            if output_result:
+                print(f"{x},{y} - {count}")
     print(highest_count)
     print(best_cords)
 

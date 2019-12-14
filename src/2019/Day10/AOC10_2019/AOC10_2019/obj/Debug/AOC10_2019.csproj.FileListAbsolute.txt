@@ -14,3 +14,4 @@ C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\
 C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.exe
 C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.pdb
 C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\obj\Debug\AOC10_2019.csprojAssemblyReference.cache
+C:\Dropbox\Github\AdventOfPython\src\2019\Day10\AOC10_2019\AOC10_2019\bin\Debug\spencinput.txt
