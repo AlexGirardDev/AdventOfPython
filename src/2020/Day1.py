@@ -9,7 +9,7 @@ def part1():
                 print(x*y)
                 return
 
-# there is no reason this has no be O(n^3) i was just being lazy and the input was pretty small
+# there is no reason this has to be O(n^3) i was just being lazy and the input was pretty small
 def part2():
     for x in f:
         for y in f:
